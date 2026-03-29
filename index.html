@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NCERT PDF Downloader</title>
+</head>
+<body>
+
+<h2>NCERT PDF Downloader</h2>
+
+<label>Class:</label>
+<select id="classSelect">
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+</select>
+
+<br><br>
+
+<label>Subject:</label>
+<select id="subjectSelect">
+    <option value="maths">Maths</option>
+    <option value="science">Science</option>
+</select>
+
+<br><br>
+
+<label>Chapter Number:</label>
+<input type="number" id="chapterInput" min="1" max="20">
+
+<br><br>
+
+<button onclick="downloadPDF()">Download PDF</button>
+
+<script>
+    // Add more book codes as needed
+    const bookCodes = {
+        "6": {
+            "maths": "femh1",
+            "science": "fesc1"
+        },
+        "7": {
+            "maths": "hemh1",
+            "science": "hesc1"
+        },
+        "8": {
+            "maths": "iemh1",
+            "science": "iesc1"
+        }
+    };
+
+    function downloadPDF() {
+        const cls = document.getElementById("classSelect").value;
+        const subject = document.getElementById("subjectSelect").value;
+        const chapter = document.getElementById("chapterInput").value;
+
+        if (!bookCodes[cls] || !bookCodes[cls][subject]) {
+            alert("Book code not available yet.");
+            return;
+        }
+
+        const code = bookCodes[cls][subject];
+        const chapterFormatted = chapter.toString().padStart(2, '0');
+
+        const pdfUrl = `https://ncert.nic.in/textbook/pdf/${code}${chapterFormatted}.pdf`;
+
+        window.open(pdfUrl, "_blank");
+    }
+</script>
+
+</body>
+</html>
